@@ -9,7 +9,7 @@ void printAsDecimal(mpq_class num, int d);
 
 int getSectionNumber (mpq_class value);
 
-mpq_class function(int index);
+mpq_class getTermValue(int index);
 
 int main(int argc, char **argv) {
     
@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
     
     mpq_class sum = 0;
     for(int i = 0; i < NUMBER_OF_SECTIONS; i++) {
-        mpq_class expectedValue((function(i+1) - function(i)) * inputNumbers.size()); //np[i]
+        mpq_class expectedValue((getTermValue(i+1) - getTermValue(i)) * inputNumbers.size()); //np[i]
         mpq_class diff(expectedValue - sections[i]); //np[i] - Y[i]
         mpq_class value(diff.get_num()*diff.get_num()*expectedValue.get_den(), //(np[i] - Y[i])^2 / np[i]
                         diff.get_den()*diff.get_den()*expectedValue.get_num());
@@ -75,15 +75,15 @@ int main(int argc, char **argv) {
 
 
 
-mpq_class function(int index) {
+mpq_class getTermValue(int index) {
     return mpq_class(index*index,100);
 }
 
 int getSectionNumber (mpq_class value) {
     
     int index = 0;
-    for(int i = 0; i <= 10; i++) {
-        if(value >= function(i)) index = i;
+    for(int i = 0; i <= NUMBER_OF_SECTIONS; i++) {
+        if(value >= getTermValue(i)) index = i;
         else return index;
     }
     return index;
