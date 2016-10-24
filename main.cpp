@@ -31,9 +31,9 @@ int main(int argc, char **argv) {
     
     int sections[NUMBER_OF_SECTIONS]; // Y[i]
     for(int i = 0; i < NUMBER_OF_SECTIONS; i++) sections[i] = 0;
-    
-    mpq_class current;
-    while (std::cin >> current) {
+    std::string currentBuf;
+    while (std::cin >> currentBuf) {
+    	mpq_class current(currentBuf);
         inputNumbers.push_back(current);
         sections[getSectionNumber(current)]++;
     }

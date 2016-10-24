@@ -8,7 +8,7 @@ do
   cat tests/firstTests/test$i | ./a.out 100 | diff tests/firstTests/wzor$i -
 
 done
-
+echo "other tests"
 for i in {1..10}
 do
 echo $i
